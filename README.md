@@ -1,10 +1,12 @@
-# 📊 Financial Dashboard — Power BI Developer Project (.pbip)
+<img width="1345" height="758" alt="Captura de pantalla 2026-09-20 225539" src="https://github.com/user-attachments/assets/1542420d-9a19-434e-8bf4-191140996bd9" />
+
+# Financial Dashboard — Power BI Developer Project (.pbip)
 
 Dashboard financiero corporativo y modelo analítico desarrollado en **Power BI Desktop** utilizando el formato moderno **Power BI Project (`.pbip`)** con **TMDL** (Tabular Model Definition Language) y **PBIR** (Power BI Report JSON), diseñado para control de versiones y colaboración en Git.
 
 ---
 
-## 🚀 Vistas del Reporte (Dashboards)
+## Vistas del Reporte (Dashboards)
 
 El reporte está diseñado en resolución **1920 × 1080 (Full HD)** con el tema corporativo **Fluent2** y comprende 3 páginas ejecutivas:
 
@@ -33,7 +35,7 @@ El reporte está diseñado en resolución **1920 × 1080 (Full HD)** con el tema
 
 ---
 
-## 🏛️ Arquitectura del Modelo de Datos (Star Schema)
+## Arquitectura del Modelo de Datos (Star Schema)
 
 El modelo semántico implementa un **esquema estrella** con relaciones de uno a varios (1:N):
 
@@ -66,7 +68,7 @@ El modelo semántico implementa un **esquema estrella** con relaciones de uno a 
 
 ---
 
-## 📐 Fórmulas DAX Destacadas
+## Fórmulas DAX Destacadas
 
 * **Utilidad Neta:**
   ```dax
@@ -91,7 +93,7 @@ El modelo semántico implementa un **esquema estrella** con relaciones de uno a 
 
 ---
 
-## 📂 Estructura del Repositorio
+## Estructura del Repositorio
 
 ```
 .
