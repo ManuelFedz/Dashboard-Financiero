@@ -1,4 +1,6 @@
 <img width="1345" height="758" alt="Captura de pantalla 2026-09-20 225539" src="https://github.com/user-attachments/assets/1542420d-9a19-434e-8bf4-191140996bd9" />
+<img width="1346" height="754" alt="Captura de pantalla 2026-09-20 225815" src="https://github.com/user-attachments/assets/bdd287ab-c119-45cd-b1ab-e3fae2f78da8" />
+<img width="1342" height="757" alt="Captura de pantalla 2026-09-20 225843" src="https://github.com/user-attachments/assets/a39bb5b9-6f00-4f98-a201-c261aba5bab8" />
 
 # Financial Dashboard — Power BI Developer Project (.pbip)
 
@@ -83,7 +85,7 @@ El modelo semántico implementa un **esquema estrella** con relaciones de uno a 
   Ingresos Año Anterior = 
       CALCULATE([Ingresos Totales], SAMEPERIODLASTYEAR(DimFecha[Fecha]))
 
-  Crecimiento YoY % = 
+  Crecimiento % = 
       DIVIDE([Ingresos Totales] - [Ingresos Año Anterior], [Ingresos Año Anterior], BLANK())
   ```
 * **Ejecución Presupuestal:**
@@ -114,7 +116,7 @@ El modelo semántico implementa un **esquema estrella** con relaciones de uno a 
 
 ---
 
-## 💻 ¿Cómo abrir y usar el proyecto?
+## ¿Cómo abrir y usar el proyecto?
 
 1. Clonar el repositorio:
    ```bash
