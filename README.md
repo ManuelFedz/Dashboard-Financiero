@@ -13,14 +13,14 @@ Dashboard financiero corporativo y modelo analítico desarrollado en **Power BI 
 El reporte está diseñado en resolución **1920 × 1080 (Full HD)** con el tema corporativo **Fluent2** y comprende 3 páginas ejecutivas:
 
 ### 1. Resumen Ejecutivo (`resumen-ejecutivo-page`)
-* **KPIs Clave:** Ingresos Totales, Gastos Totales, Utilidad Neta, Margen Neto %, Crecimiento YoY % y acumulados del año (Ingresos YTD, Gastos YTD, Utilidad YTD).
+* **KPIs Clave:** Ingresos Totales, Gastos Totales, Utilidad Neta, Margen Neto %, Crecimiento Anual % y acumulados del año (Ingresos hasta la fecha, Gastos hasta la fecha, Utilidad hasta la fecha).
 * **Comparativo Ingresos vs. Gastos:** Gráfico de columnas agrupadas con evolución mensual.
 * **Tendencia de Utilidad:** Análisis temporal de la rentabilidad y comportamiento del margen.
 * **Mix de Ingresos:** Distribución porcentual por línea de negocio.
 * **Filtros:** Segmentación interactiva por Año fiscal.
 
 ### 2. Análisis de Ingresos (`analisis-ingresos-page`)
-* **KPIs:** Facturación Total, Variación Interanual (YoY %) y Ticket Promedio por venta.
+* **KPIs:** Facturación Total, Variación Interanual (% Anual) y Ticket Promedio por venta.
 * **Evolución y Estacionalidad:** Histórico de facturación para detectar patrones comerciales.
 * **Ranking por Categoría:** Desglose de ingresos por servicio (Software, Licencias, Consultoría, Soporte, Capacitación).
 * **Desempeño Regional:** Participación y comparativo vs. año anterior por territorio (Norte, Centro, Sur).
