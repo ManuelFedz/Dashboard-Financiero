@@ -116,7 +116,7 @@ El modelo semántico implementa un **esquema estrella** con relaciones de uno a 
 
 ---
 
-## ¿Cómo abrir y usar el proyecto?
+## Como abrir y usar el proyecto?
 
 1. Clonar el repositorio:
    ```bash
