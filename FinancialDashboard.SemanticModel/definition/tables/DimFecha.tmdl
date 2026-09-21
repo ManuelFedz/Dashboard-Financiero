@@ -1,0 +1,95 @@
+table DimFecha
+	lineageTag: dim-fecha-01
+
+	column FechaID
+		dataType: int64
+		formatString: 0
+		lineageTag: dim-fecha-col-01
+		summarizeBy: none
+		sourceColumn: FechaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fecha
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		lineageTag: dim-fecha-col-02
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		variation Variación
+			isDefault
+			relationship: 6e2040f5-b569-4376-b908-70ee2b089c31
+			defaultHierarchy: LocalDateTable_65d4bc55-37c1-415d-9944-ec883e96ee1b.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Año
+		dataType: int64
+		formatString: 0
+		lineageTag: dim-fecha-col-03
+		summarizeBy: sum
+		sourceColumn: Año
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mes
+		dataType: int64
+		formatString: 0
+		lineageTag: dim-fecha-col-04
+		summarizeBy: sum
+		sourceColumn: Mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column NombreMes
+		dataType: string
+		lineageTag: dim-fecha-col-05
+		summarizeBy: none
+		sourceColumn: NombreMes
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		dataType: string
+		lineageTag: dim-fecha-col-06
+		summarizeBy: none
+		sourceColumn: Trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column AñoMes
+		dataType: string
+		lineageTag: dim-fecha-col-07
+		summarizeBy: none
+		sourceColumn: AñoMes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimFecha-Partition = m
+		mode: import
+		source =
+				let
+				    FechaInicio = #date(2023, 1, 1),
+				    FechaFin    = #date(2025, 12, 31),
+				    Dias        = Duration.Days(FechaFin - FechaInicio) + 1,
+				    Fechas      = List.Dates(FechaInicio, Dias, #duration(1, 0, 0, 0)),
+				    Tabla       = Table.FromList(Fechas, Splitter.SplitByNothing(), {"Fecha"}),
+				    Tipado      = Table.TransformColumnTypes(Tabla, {{"Fecha", type date}}),
+				    ConID       = Table.AddColumn(Tipado, "FechaID",    each Date.Year([Fecha]) * 10000 + Date.Month([Fecha]) * 100 + Date.Day([Fecha]), Int64.Type),
+				    ConAnio     = Table.AddColumn(ConID,  "Anio",       each Date.Year([Fecha]),    Int64.Type),
+				    ConMes      = Table.AddColumn(ConAnio,"Mes",        each Date.Month([Fecha]),   Int64.Type),
+				    NombresMes  = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"},
+				    ConNomMes   = Table.AddColumn(ConMes, "NombreMes",  each NombresMes{Date.Month([Fecha]) - 1}),
+				    ConTrim     = Table.AddColumn(ConNomMes,"Trimestre",each "Q" & Text.From(Date.QuarterOfYear([Fecha]))),
+				    ConAnioMes  = Table.AddColumn(ConTrim,"AnioMes",    each Text.From(Date.Year([Fecha])) & "-" & Text.PadStart(Text.From(Date.Month([Fecha])),2,"0")),
+				    #"Columnas con nombre cambiado" = Table.RenameColumns(ConAnioMes,{{"Anio", "Año"}, {"AnioMes", "AñoMes"}})
+				in
+				    #"Columnas con nombre cambiado"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

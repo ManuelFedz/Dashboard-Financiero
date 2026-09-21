@@ -1,0 +1,87 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 738.78491211234177,
+            "y": 165.6628266125449
+          },
+          "nodeIndex": "Medidas",
+          "nodeLineageTag": "medidas-tabla-01",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 220.59483538385768,
+            "y": -50
+          },
+          "nodeIndex": "DimCategoria",
+          "nodeLineageTag": "dim-categoria-01",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 334.1737678907765,
+            "y": 333.32565322508981
+          },
+          "nodeIndex": "DimFecha",
+          "nodeLineageTag": "dim-fecha-01",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 198.58618444669253
+          },
+          "nodeIndex": "FactGastos",
+          "nodeLineageTag": "fact-gastos-01",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 504.78491211234189,
+            "y": 59.140657918450756
+          },
+          "nodeIndex": "FactVentas",
+          "nodeLineageTag": "fact-ventas-01",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas las tablas",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas las tablas",
+  "defaultDiagram": "Todas las tablas"
+}

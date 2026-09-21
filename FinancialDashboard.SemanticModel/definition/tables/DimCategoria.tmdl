@@ -1,0 +1,54 @@
+table DimCategoria
+	lineageTag: dim-categoria-01
+
+	column CategoriaID
+		dataType: int64
+		formatString: 0
+		lineageTag: dim-cat-col-01
+		summarizeBy: none
+		sourceColumn: CategoriaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Categoria
+		dataType: string
+		lineageTag: dim-cat-col-02
+		summarizeBy: none
+		sourceColumn: Categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column TipoCategoria
+		dataType: string
+		lineageTag: dim-cat-col-03
+		summarizeBy: none
+		sourceColumn: TipoCategoria
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimCategoria-Partition = m
+		mode: import
+		source =
+				let
+				    Datos = #table(
+				        type table [CategoriaID = Int64.Type, Categoria = text, TipoCategoria = text],
+				        {
+				            {1,  "Software",          "Ingreso"},
+				            {2,  "Consultoría",       "Ingreso"},
+				            {3,  "Licencias",         "Ingreso"},
+				            {4,  "Soporte",           "Ingreso"},
+				            {5,  "Capacitación",      "Ingreso"},
+				            {6,  "Nómina",            "Gasto"},
+				            {7,  "Infraestructura",   "Gasto"},
+				            {8,  "Marketing",         "Gasto"},
+				            {9,  "Administración",    "Gasto"},
+				            {10, "Investigación",     "Gasto"}
+				        }
+				    )
+				in
+				    Datos
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

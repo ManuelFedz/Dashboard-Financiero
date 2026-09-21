@@ -1,0 +1,10 @@
+# Power BI / Fabric generated files
+.pbi/localSettings.json
+.pbi/cache.abf
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.pbix.bak

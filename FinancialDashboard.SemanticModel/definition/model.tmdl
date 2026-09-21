@@ -1,0 +1,23 @@
+model Model
+	culture: es-MX
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-MX
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+annotation PBI_QueryOrder = ["DimCategoria","DimFecha","FactGastos","FactVentas","Medidas"]
+
+ref table DimCategoria
+ref table DimFecha
+ref table FactGastos
+ref table FactVentas
+ref table Medidas
+ref table DateTableTemplate_4f83af25-6b91-47db-ba81-b48e344316f8
+ref table LocalDateTable_65d4bc55-37c1-415d-9944-ec883e96ee1b
+

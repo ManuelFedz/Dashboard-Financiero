@@ -1,0 +1,169 @@
+table Medidas
+	lineageTag: medidas-tabla-01
+
+	/// Ingresos totales del período seleccionado
+	measure 'Ingresos Totales' = SUM(FactVentas[Ingresos])
+		formatString: \$#,0;(\$#,0)
+		lineageTag: med-01
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Gastos totales del período seleccionado
+	measure 'Gastos Totales' = SUM(FactGastos[Gastos])
+		formatString: \$#,0;(\$#,0)
+		lineageTag: med-02
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Utilidad = Ingresos - Gastos
+	measure 'Utilidad Neta' = [Ingresos Totales] - [Gastos Totales]
+		formatString: \$#,0;(\$#,0)
+		lineageTag: med-03
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Margen neto como porcentaje sobre ingresos
+	measure 'Margen Neto %' = DIVIDE([Utilidad Neta], [Ingresos Totales], 0)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: med-04
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Presupuesto total de gastos
+	measure 'Presupuesto Total' = SUM(FactGastos[Presupuesto])
+		formatString: \$#,0;(\$#,0)
+		lineageTag: med-05
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Variación entre gasto real y presupuesto (negativo = sobregasto)
+	measure 'Variación vs Presupuesto' = [Presupuesto Total] - [Gastos Totales]
+		formatString: \$#,0;(\$#,0)
+		lineageTag: med-06
+
+		annotation SummarizationSetBy = Automatic
+
+	/// % de ejecución presupuestal
+	measure '% Ejecución Presupuesto' = DIVIDE([Gastos Totales], [Presupuesto Total], 0)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: med-07
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Ingresos del mismo período del año anterior
+	measure 'Ingresos Año Anterior' =
+			CALCULATE(
+			    [Ingresos Totales],
+			    SAMEPERIODLASTYEAR(DimFecha[Fecha])
+			)
+		formatString: \$#,0;(\$#,0)
+		lineageTag: med-08
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Crecimiento YoY en valor absoluto
+	measure 'Crecimiento YoY $' = [Ingresos Totales] - [Ingresos Año Anterior]
+		formatString: \$#,0;(\$#,0)
+		lineageTag: med-09
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Crecimiento YoY como porcentaje
+	measure 'Crecimiento Anual %' = DIVIDE([Crecimiento YoY $], [Ingresos Año Anterior], BLANK())
+		formatString: +0.0%;-0.0%;0.0%
+		lineageTag: med-10
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Ingresos acumulados en el año (YTD)
+	measure 'Ingresos YTD' = TOTALYTD([Ingresos Totales], DimFecha[Fecha])
+		formatString: \$#,0;(\$#,0)
+		lineageTag: med-11
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Gastos acumulados en el año (YTD)
+	measure 'Gastos YTD' = TOTALYTD([Gastos Totales], DimFecha[Fecha])
+		formatString: \$#,0;(\$#,0)
+		lineageTag: med-12
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Utilidad acumulada YTD
+	measure 'Utilidad YTD' = [Ingresos YTD] - [Gastos YTD]
+		formatString: \$#,0;(\$#,0)
+		lineageTag: med-13
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Ticket promedio por transacción de venta
+	measure 'Ticket Promedio' = DIVIDE([Ingresos Totales], COUNTROWS(FactVentas), 0)
+		formatString: \$#,0;(\$#,0)
+		lineageTag: med-14
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Gastos del mismo período del año anterior
+	measure 'Gastos Año Anterior' =
+			CALCULATE(
+			    [Gastos Totales],
+			    SAMEPERIODLASTYEAR(DimFecha[Fecha])
+			)
+		formatString: \$#,0;(\$#,0)
+		lineageTag: med-15
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Título para cabecera de Resumen Ejecutivo
+	measure 'Título Resumen' = "DASHBOARD FINANCIERO — RESUMEN EJECUTIVO"
+		lineageTag: med-tit-01
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Título para cabecera de Análisis de Ingresos
+	measure 'Título Ingresos' = "DASHBOARD FINANCIERO — ANÁLISIS DE INGRESOS"
+		lineageTag: med-tit-02
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Título para cabecera de Control de Gastos
+	measure 'Título Gastos' = "DASHBOARD FINANCIERO — CONTROL DE GASTOS Y PRESUPUESTO"
+		lineageTag: med-tit-03
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Cantidad de meses analizados en el filtro activo
+	measure 'Meses Analizados' = DISTINCTCOUNT(DimFecha[AñoMes])
+		formatString: #,0
+		lineageTag: med-meses-activos
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Cantidad de años fiscales disponibles
+	measure 'Años Fiscales' = DISTINCTCOUNT(DimFecha[Año])
+		formatString: #,0
+		lineageTag: med-anios-activos
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dummy
+		dataType: string
+		isHidden
+		lineageTag: med-col-dummy
+		summarizeBy: none
+		sourceColumn: Dummy
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Medidas-Partition = m
+		mode: import
+		source =
+				let
+				    Origen = #table(type table [Dummy = text], {{"Medidas"}})
+				in
+				    Origen
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

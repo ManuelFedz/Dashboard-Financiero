@@ -1,0 +1,21 @@
+relationship FactVentas_DimFecha
+	fromColumn: FactVentas.FechaID
+	toColumn: DimFecha.FechaID
+
+relationship FactGastos_DimFecha
+	fromColumn: FactGastos.FechaID
+	toColumn: DimFecha.FechaID
+
+relationship FactVentas_DimCategoria
+	fromColumn: FactVentas.CategoriaID
+	toColumn: DimCategoria.CategoriaID
+
+relationship FactGastos_DimCategoria
+	fromColumn: FactGastos.CategoriaID
+	toColumn: DimCategoria.CategoriaID
+
+relationship 6e2040f5-b569-4376-b908-70ee2b089c31
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimFecha.Fecha
+	toColumn: LocalDateTable_65d4bc55-37c1-415d-9944-ec883e96ee1b.Date
+
